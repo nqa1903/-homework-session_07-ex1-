@@ -87,9 +87,7 @@ Kết quả (đối chiếu với output thực tế của tôi trong ảnh bên
 - `id sftp-user` chỉ có nhóm `sftp-user`, **không có nhóm `sudo`**.
 - `ls -l` hiển thị `-rw-r----- 1 root sftp-user ... backup-check.log`.
 - `sudo -u sftp-user cat ...` đọc được nội dung file log.
-
-![Kết quả id và ls -l trên VPS](images/01-vps-id-ls.png)
-
+  
 ## 5. Kết nối SFTP từ Windows bằng WinSCP
 
 1. Mở WinSCP, chọn **New Session**.
@@ -101,21 +99,16 @@ Kết quả (đối chiếu với output thực tế của tôi trong ảnh bên
    - **Password:** mật khẩu của `sftp-user`
 3. Nhấn **Login**, chọn **Yes** khi WinSCP hỏi xác nhận host key.
 
-![Cửa sổ đăng nhập WinSCP](images/02-winscp-login.png)
-
 4. Sau khi kết nối thành công, ở khung bên phải (Remote) truy cập thư mục `/var/log/app-backup/`.
 
-![WinSCP đã kết nối thành công và thấy file backup-check.log](images/03-winscp-connected.png)
 
 5. Kéo thả tệp `backup-check.log` sang khung bên trái (Local) để tải về máy.
 
-![Tệp backup-check.log đã được tải về máy Windows](images/04-downloaded-file.png)
 
 ## 6. Kiểm tra trên Windows
 
 Mở tệp vừa tải về và so sánh nội dung với file gốc trên VPS.
 
-![Nội dung file log trên Windows](images/05-open-file-windows.png)
 
 Kiểm tra toàn vẹn bằng hash SHA-256 (PowerShell):
 
@@ -125,7 +118,6 @@ Get-FileHash .\backup-check.log -Algorithm SHA256
 
 Giá trị hash trên Windows trùng khớp với kết quả `sha256sum` trên VPS, chứng tỏ tệp được truyền nguyên vẹn.
 
-![So sánh hash SHA-256](images/06-hash-compare.png)
 
 ## 7. Kết luận
 
